@@ -59,7 +59,7 @@ Coverage and themes use these ten keys:
   {
     "area": "CUSTOMER_MARKET",
     "theme": "Short theme title",
-    "evidence": ["Key point or quote from source", "Another supporting point"],
+    "evidence": ["A span copied VERBATIM from the source — character for character, including any typos. It must appear in the source exactly as written. Prefer the user's own words over the assistant's."],
     "confidence": "HIGH"
   }
 ]
@@ -74,7 +74,8 @@ Coverage and themes use these ten keys:
   {
     "topic": "Short descriptive title",
     "content": "Full explanation of this strategic theme, with evidence and context.",
-    "sources": ["Document name", "Conversation topic"]
+    "sources": ["Document name", "Conversation topic"],
+    "evidence": ["A span copied VERBATIM from the source — character for character, including any typos. It must appear in the source exactly as written. Prefer the user's own words."]
   }
 ]
 ```
@@ -117,5 +118,6 @@ Before emitting, confirm:
 - [ ] `version`, `framework`, `preparedAt`, `mode`, `coverage`, `rawSummary` are present.
 - [ ] Either `themes` or `chunks` is present (or both).
 - [ ] All `area` and `coverage` keys come from the ten strategic-area keys above.
+- [ ] Every theme/chunk carries at least one verbatim evidence span.
 - [ ] No raw secrets in any string field.
 - [ ] JSON is valid (parseable).
