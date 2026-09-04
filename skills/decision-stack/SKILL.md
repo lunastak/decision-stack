@@ -154,7 +154,7 @@ When the user says "export", "I'm done", or you've covered enough ground, produc
     {
       "area": "CUSTOMER_MARKET",
       "theme": "Short theme title",
-      "evidence": ["Key point or quote from source", "Another supporting point"],
+      "evidence": ["A span copied VERBATIM from the source — character for character, including any typos. It must appear in the source exactly as written. Prefer the user's own words over the assistant's."],
       "confidence": "HIGH"
     }
   ],
@@ -190,7 +190,8 @@ If the user asks for a generic format (or you're unsure which dimensions apply),
     {
       "topic": "Short descriptive title",
       "content": "Full explanation of this strategic theme, with evidence and context",
-      "sources": ["Document name", "Conversation topic"]
+      "sources": ["Document name", "Conversation topic"],
+      "evidence": ["A span copied VERBATIM from the source — character for character, including any typos. It must appear in the source exactly as written. Prefer the user's own words."]
     }
   ],
   "openQuestions": [...],
