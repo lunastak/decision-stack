@@ -78,7 +78,8 @@ When the user says "export" or "I'm done", produce a JSON code block they can co
     {
       "topic": "Short descriptive title",
       "content": "Full explanation of this strategic theme, with evidence and context",
-      "sources": ["Document name", "Conversation topic"]
+      "sources": ["Document name", "Conversation topic"],
+      "evidence": ["A span copied VERBATIM from the source — character for character, including any typos. It must appear in the source exactly as written. Prefer the user's own words."]
     }
   ],
   "openQuestions": [
