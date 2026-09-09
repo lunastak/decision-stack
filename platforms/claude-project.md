@@ -135,6 +135,7 @@ When the user says "export", "I'm done", or you've covered enough ground, produc
 {
   "version": "1.0",
   "framework": "decision-stack",
+  "generatedBy": "claude-project",
   "preparedAt": "2026-03-28T10:00:00Z",
   "chunks": [
     {
@@ -160,7 +161,9 @@ When the user says "export", "I'm done", or you've covered enough ground, produc
 }
 ```
 
-The chunk format lets Lunastak's extraction pipeline handle dimensional classification automatically. Ensure every strategic area has at least one chunk represented.
+The chunk format lets Lunastak's extraction pipeline handle dimensional classification automatically. `generatedBy` is exactly the string `claude-project` — copy it as written, never change or omit it. It tells Lunastak which tool built the bundle, which is how the different ways of preparing context get compared.
+
+Ensure every strategic area has at least one chunk represented.
 
 After producing the JSON, say:
 

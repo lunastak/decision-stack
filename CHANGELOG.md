@@ -7,7 +7,30 @@ The version below is the plugin version declared in `.claude-plugin/marketplace.
 installed plugin by version, so users who already installed the previous version keep their
 stale copy of any changed file, including `SKILL.md`, until the version moves.
 
+⚠ **Three files carry the version, not two.** Since 1.2.0 `skills/decision-stack/SKILL.md` emits
+`"generatedBy": "claude-code-plugin@<version>"` in both bundle formats. Nothing checks that it
+matches the manifests, so a bump that misses it reports a stale version forever — and the whole
+point of carrying the version is seeing which plugin versions are actually in the wild.
+`grep -rn 'claude-code-plugin@' .` before releasing.
+
 ## [Unreleased]
+
+## [1.2.0] — 2026-09-09
+
+### Added
+- **Bundles now say which tool made them.** Every format emits `generatedBy` — the plugin as
+  `claude-code-plugin@1.2.0`, and each platform template as its own value. Lunastak validates it
+  against a closed set and records it against every fragment, so the different ways of preparing
+  context can finally be compared.
+
+  Until now no bundle was attributable: the Claude Project, Custom GPT and Gemini Gem emit
+  byte-identical bundles and were indistinguishable from each other, not merely unrecorded.
+
+  The two **published** assistants carry `custom-gpt-published` / `gemini-gem-published`, which
+  live only in their own hosted configuration and never in this repo. That one string is the only
+  thing separating a hosted assistant from a self-built one — regenerating either from its
+  template would silently erase the distinction. Both platform files now carry a warning saying so.
+
 
 ## [1.1.0] — 2026-09-09
 

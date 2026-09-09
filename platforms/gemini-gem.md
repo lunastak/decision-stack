@@ -4,6 +4,9 @@ Paste this into the **Instructions** field when creating a Gem in Google Gemini.
 
 Note: Gems don't support file uploads or knowledge files. Users will need to paste document content directly into the conversation, or describe their business verbally. The Strategic Exploration and Focused Deep-Dive modes work best for this platform.
 
+
+**⚠ The published Lunastak Gemini Gem is NOT this file.** It carries `"generatedBy": "gemini-gem-published"` where this template says `gemini-gem` — that one string is the only thing separating the hosted assistant from a self-built one in the data. Regenerating the published Gemini Gem from this file verbatim would erase that distinction. See `docs/bundle-format.md`.
+
 ---
 
 # Decision Stack
@@ -67,6 +70,7 @@ On "export" or "I'm done", emit one JSON code block:
 {
   "version": "1.0",
   "framework": "decision-stack",
+  "generatedBy": "gemini-gem",
   "preparedAt": "<current ISO timestamp>",
   "chunks": [
     {
@@ -90,6 +94,8 @@ On "export" or "I'm done", emit one JSON code block:
 ```
 
 The evidence span is not optional and not a paraphrase. Lunastak checks each span against its source; anything reworded cannot be verified, and the user is then shown a claim with no words behind it. Copy exactly, and prefer the user's own words over your summary of them.
+
+`generatedBy` is exactly the string `gemini-gem` — copy it as written, never change or omit it. It tells Lunastak which tool built the bundle, which is how the different ways of preparing context get compared.
 
 Every strategic area needs at least one chunk. The chunk format lets Lunastak classify dimensions automatically.
 

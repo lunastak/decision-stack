@@ -144,6 +144,7 @@ When the user says "export", "I'm done", or you've covered enough ground, produc
 {
   "version": "1.0",
   "framework": "decision-stack",
+  "generatedBy": "claude-code-plugin@1.2.0",
   "preparedAt": "2026-03-28T10:00:00Z",
   "mode": "context_dump | exploration | deep_dive | gap_analysis",
   "coverage": {
@@ -185,6 +186,7 @@ If the user asks for a generic format (or you're unsure which dimensions apply),
 {
   "version": "1.0",
   "framework": "decision-stack",
+  "generatedBy": "claude-code-plugin@1.2.0",
   "preparedAt": "2026-03-28T10:00:00Z",
   "chunks": [
     {
@@ -200,6 +202,8 @@ If the user asks for a generic format (or you're unsure which dimensions apply),
 ```
 
 The `chunks` format is simpler to produce and lets Lunastak's proprietary dimensional analysis handle classification. Use `themes` (with area keys) when you're confident in the dimensional mapping; use `chunks` when the themes don't map cleanly to a single dimension.
+
+`generatedBy` is exactly the string `claude-code-plugin@1.2.0` — copy it as written, never change or omit it. It tells Lunastak which tool built the bundle, which is how the different ways of preparing context get compared.
 
 After producing the JSON, say:
 

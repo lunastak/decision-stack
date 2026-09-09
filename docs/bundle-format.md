@@ -24,6 +24,7 @@ The canonical version of this spec lives at [lunastak.io/docs/context-bundles](h
 |---|---|---|---|
 | `version` | yes | string | Schema version. Current: `"1.0"`. |
 | `framework` | yes | string | Always `"decision-stack"`. |
+| `generatedBy` | optional | string | Which tool produced the bundle. See below. Bundles emitted before 2026-09-09 lack it. |
 | `preparedAt` | yes | string (ISO 8601) | When the bundle was emitted. |
 | `mode` | yes | string | Dominant interaction shape. One of `context_dump`, `exploration`, `deep_dive`, `gap_analysis`. |
 | `coverage` | yes | object | Coverage per strategic area. See below. |
@@ -32,6 +33,29 @@ The canonical version of this spec lives at [lunastak.io/docs/context-bundles](h
 | `openQuestions` | optional | array | Questions surfaced for further exploration. |
 | `tensions` | optional | array | Contradictions or trade-offs noted during the session. |
 | `rawSummary` | yes | string | Human-readable summary of the whole session. |
+
+## `generatedBy` — which tool made this bundle
+
+Optional, added 2026-09-09. Backwards compatible: absent is valid, and every bundle emitted before
+that date lacks it.
+
+| Value | Emitted by |
+|---|---|
+| `claude-code-plugin@<version>` | the Claude Code / Desktop plugin |
+| `claude-project` | a Claude Project built from `platforms/claude-project.md` |
+| `custom-gpt` | a Custom GPT built from `platforms/custom-gpt.md` |
+| `custom-gpt-published` | **the published Lunastak GPT** |
+| `gemini-gem` | a Gem built from `platforms/gemini-gem.md` |
+| `gemini-gem-published` | **the published Lunastak Gem** |
+
+The `-published` values live ONLY in the two hosted assistants' own configuration, never in this
+repo's templates. That is deliberate and it is the only way a hosted assistant can be told from a
+self-built one — the distinction cannot be inferred from bundle content. **Regenerating a published
+assistant from its template would silently erase it.**
+
+Lunastak validates against this closed set and stores anything else as `unknown`; the value is
+self-reported by a model, so it is never trusted as free text. Absent is stored as null, which
+means "unknown" and is not a category.
 
 ## Which route emits which format
 

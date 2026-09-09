@@ -8,6 +8,9 @@ Set **Conversation starters** to:
 - "I want to deep-dive into one area"
 - "Show me what's missing from what I've shared"
 
+
+**⚠ The published Lunastak Custom GPT is NOT this file.** It carries `"generatedBy": "custom-gpt-published"` where this template says `custom-gpt` — that one string is the only thing separating the hosted assistant from a self-built one in the data. Regenerating the published Custom GPT from this file verbatim would erase that distinction. See `docs/bundle-format.md`.
+
 ---
 
 # Decision Stack
@@ -71,6 +74,7 @@ On "export" or "I'm done", emit one JSON code block:
 {
   "version": "1.0",
   "framework": "decision-stack",
+  "generatedBy": "custom-gpt",
   "preparedAt": "<current ISO timestamp>",
   "chunks": [
     {
@@ -94,6 +98,8 @@ On "export" or "I'm done", emit one JSON code block:
 ```
 
 The evidence span is not optional and not a paraphrase. Lunastak checks each span against its source; anything reworded cannot be verified, and the user is then shown a claim with no words behind it. Copy exactly, and prefer the user's own words over your summary of them.
+
+`generatedBy` is exactly the string `custom-gpt` — copy it as written, never change or omit it. It tells Lunastak which tool built the bundle, which is how the different ways of preparing context get compared.
 
 Every strategic area needs at least one chunk. The chunk format lets Lunastak classify dimensions automatically.
 
