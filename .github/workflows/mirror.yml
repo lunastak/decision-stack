@@ -13,10 +13,22 @@ concurrency:
 
 jobs:
   mirror:
+    # ⚠ ONLY RUN IN THE SOURCE REPO.
+    #
+    # The push below is `--all --force`, so it copies every ref — including THIS FILE. The mirror
+    # therefore receives the workflow and runs it too, where there is no MIRROR_PAT: the remote URL
+    # gets an empty token and the push dies with exit 128. Every run in thedecisionstack/tools had
+    # failed that way since the mirror was set up, emailing a "Run failed" alert on each push, which
+    # read as "the mirror is broken" when the mirror had in fact never failed once.
+    #
+    # A file cannot be excluded from a `--all` push, so guarding the job is the fix. The mirrored
+    # copy now skips instead of failing.
+    if: github.repository == 'lunastak/tools'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source (full history, all branches)
-        uses: actions/checkout@v4
+        # v5: v4 targets Node 20, deprecated and already force-run on Node 24.
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
           persist-credentials: false
