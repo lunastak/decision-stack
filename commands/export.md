@@ -9,7 +9,8 @@ Before emitting the final JSON, preview the bundle:
 1. Show the coverage summary by area (`rich` / `adequate` / `partial` / `empty`).
 2. List the themes, open questions, and tensions you plan to include.
 3. Flag any thin areas the user may want to fill before export.
-4. Confirm: "Ready to emit the bundle, or do you want to add anything first?"
+4. Confirm every theme/chunk carries a verbatim evidence span — copied exactly, not paraphrased.
+5. Confirm: "Ready to emit the bundle, or do you want to add anything first?"
 
 When the user confirms, emit a single JSON code block matching the schema in `docs/bundle-format.md`. After emitting, tell the user:
 

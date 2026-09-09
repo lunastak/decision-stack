@@ -9,6 +9,21 @@ stale copy of any changed file, including `SKILL.md`, until the version moves.
 
 ## [Unreleased]
 
+## [1.1.0] — 2026-09-09
+
+### Changed
+- **Every theme and chunk now carries a verbatim evidence span** — copied character for
+  character from the source, typos included, preferring the user's own words. Applied across
+  the skill, `/lunastak:export`, the bundle format doc, and all three platform variants
+  (Claude Project, Custom GPT, Gemini Gem), so a bundle means the same thing whichever one
+  produced it.
+
+  This pairs with app.lunastak.io v2.7.0, which verifies each span against its source at
+  import. A paraphrase cannot be verified, so it lands as `unverifiable` and the ground truth
+  review cannot show the user the words behind it. **Bumping the version is what makes this
+  reach people** — an installed plugin is cached by version, so anyone on 1.0.1 keeps the old
+  `SKILL.md` until this number moves.
+
 ### Added
 - `LICENSE` (MIT) — the README already linked it, but the file was missing.
 
