@@ -11,7 +11,7 @@
     {
       "name": "lunastak",
       "description": "Prepare a Decision Stack context bundle from documents and conversation, then export to app.lunastak.io.",
-      "version": "1.0.1",
+      "version": "1.1.0",
       "category": "productivity",
       "homepage": "https://lunastak.io",
       "source": "./",
