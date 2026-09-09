@@ -33,6 +33,45 @@ The canonical version of this spec lives at [lunastak.io/docs/context-bundles](h
 | `tensions` | optional | array | Contradictions or trade-offs noted during the session. |
 | `rawSummary` | yes | string | Human-readable summary of the whole session. |
 
+## Which route emits which format
+
+Four tools produce bundles and they are **not equivalent**. This is deliberate, and worth knowing
+before you compare two bundles and wonder why one is richer.
+
+| Route | Emits | Dimensions assigned by | Notes |
+|---|---|---|---|
+| **Claude Code / Desktop plugin** (`lunastak:decision-stack`) | `themes` **and** `chunks` | the tool, at capture — `area` + `confidence` per theme | The fullest. Also the only route with `/lunastak:resume`. |
+| **Claude Project** (self-built from template) | `chunks` | Lunastak, by an LLM tagging pass at import | |
+| **Custom GPT** (self-built or the published one) | `chunks` | Lunastak, by an LLM tagging pass at import | |
+| **Gemini Gem** (self-built or the published one) | `chunks` | Lunastak, by an LLM tagging pass at import | No file uploads on the platform — users paste content. |
+
+Both shapes are first-class: `import-bundle` picks the direct area mapping when a bundle has no
+`chunks`, and the LLM tagging pass when it does. A `chunks` bundle costs one extra LLM call at
+import and has its dimensions **inferred** rather than captured; a `themes` bundle carries the
+tagging the user actually saw.
+
+### Why the platform variants stop at `chunks`
+
+Two reasons, and only one of them is a hard limit.
+
+**The deliberate one.** `chunks` hands dimensional classification to Lunastak, which tags with the
+same analyser it uses for conversations and documents. A GPT or a Gem is not Claude, and its
+guess at which of ten areas a theme belongs to is the weakest link in the chain. Letting the app
+tag keeps every self-built route producing identical bundles, and keeps the tagging consistent
+with everything else in a project.
+
+**The ceiling.** A ChatGPT Custom GPT caps its Instructions field at **8,000 characters**, and
+the field truncates silently — losing the tail of the instructions costs far more than a richer
+format gains. The long-form `custom-gpt.md` ran to ~7,800 characters, so the dimensional format
+(the area keys, the `confidence` scale, and the guidance for choosing between the two shapes —
+roughly 600 characters) genuinely did not fit.
+
+That is no longer the binding constraint: the condensed instruction sets land around 5,000
+characters, leaving ~3,000 spare. **So if the platform variants should emit `themes`, that is now
+a product decision rather than a technical one** — and it should be taken for all three at once,
+or not at all. Whatever is decided, keep the Claude Project, Custom GPT and Gemini Gem aligned:
+a user who builds their own should get the same bundle whichever platform they picked.
+
 ## Strategic area keys
 
 Coverage and themes use these ten keys:
